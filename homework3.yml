@@ -24,10 +24,10 @@
         state: present
 
     - name: git clone
-        git:
-          repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello
-          dest: /home/regina/
-          clone: yes
+      git:
+        repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello
+        dest: /home/regina/
+        clone: yes
 
     - name: create war file
         shell: chdir=/home/regina/boxfuse-sample-java-war-hello/  mvn package
