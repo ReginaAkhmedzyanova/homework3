@@ -1,0 +1,53 @@
+---
+- name: build war
+  hosts: build
+  become: yes
+
+  tasks:
+    - name: apt-update
+        apt:
+          update_cache: yes
+
+    - name: install git
+        apt:
+          name: git
+          state: present
+
+    - name: install openjdk-11-jdk
+        apt:
+          name: openjdk-11-jdk
+          state: present
+
+    - name: install maven
+        apt:
+          name: maven
+          state: present
+
+    - name: git clone
+        git:
+          repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello
+          dest: /home/regina/
+          clone: yes
+
+    - name: create war file
+        shell: chdir=/home/regina/boxfuse-sample-java-war-hello/  mvn package
+
+    - name: copy war to remote host
+      copy:
+        src: /home/regina/boxfuse-sample-java-war-hello/target/hello-1.0.war
+        dest: 'root@51.250.95.169:/tmp'
+         
+
+- name: prod
+  hosts: prod
+  become: yes
+
+  tasks:
+    - name: apt-update
+        apt:
+          update_cache: yes
+      
+    - name: install tomcat
+        apt:
+          name: tomcat9
+          state: present
