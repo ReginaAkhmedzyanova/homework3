@@ -44,6 +44,7 @@
       copy:
         src: /home/regina/homework3/target/hello-1.0.war
         dest: "root@51.250.95.169:/tmp"
+        remote_src: yes
          
 
 - name: prod
