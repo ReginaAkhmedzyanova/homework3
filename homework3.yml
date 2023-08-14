@@ -30,11 +30,11 @@
         clone: yes
 
     - name: create war file
-      shell: chdir=/home/regina/homework3/boxfuse-sample-java-war-hello/  mvn package
+      shell: chdir=/home/regina/homework3  mvn package
 
     - name: copy war to remote host
       copy:
-        src: /home/regina/homework3/boxfuse-sample-java-war-hello/target/hello-1.0.war
+        src: /home/regina/homework3/target/hello-1.0.war
         dest: 'root@51.250.95.169:/tmp'
          
 
