@@ -43,7 +43,7 @@
     - name: copy war to remote host
       copy:
         src: /home/regina/homework3/target/hello-1.0.war
-        dest: "root@51.250.92.43:/tmp"
+        dest: "root@51.250.92.43:/home/regina/homework3/"
         remote_src: yes
          
 
