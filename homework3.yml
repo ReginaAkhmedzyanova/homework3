@@ -32,10 +32,10 @@
     - name: create war file
       shell: chdir=/home/regina/homework3  mvn package
 
-    - name: copy war to remote host
+    - name: copy war to localhost
       fetch:
         src: /home/regina/homework3/target/hello-1.0.war
-        dest: /home/regina/homework3/
+        dest: /tmp
          
 
 - name: prod
@@ -46,8 +46,18 @@
     - name: apt-update
       apt:
         update_cache: yes
+    
+    - name: install openjdk-11-jdk
+      apt:
+        name: openjdk-11-jdk
+        state: present
       
     - name: install tomcat
       apt:
         name: tomcat9
         state: present
+    
+    - name: copy war file to remote host
+      copy:
+        src: tmp/hello-1.0.war
+        dest: /var/lib/tomcat9/webapps/
