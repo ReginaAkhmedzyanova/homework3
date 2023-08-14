@@ -32,19 +32,10 @@
     - name: create war file
       shell: chdir=/home/regina/homework3  mvn package
 
-    - name: Set war file Rights
-      file:
-        path: "/home/regina/homework3/target/hello-1.0.war"
-        owner: root
-        group: root
-        mode: 0777   
-
-
     - name: copy war to remote host
-      copy:
+      fetch:
         src: /home/regina/homework3/target/hello-1.0.war
-        dest: "root@51.250.92.43:/home/regina/homework3/"
-        remote_src: yes
+        dest: /home/regina/homework3/
          
 
 - name: prod
